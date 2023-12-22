@@ -1,9 +1,35 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+import 'package:synapse_teacher/firebase_options.dart';
 
+import 'screens/splash/splash.dart';
+// import 'package:synapse_new/firebase_options.dart';
+
+void main() async {
+  //
+  WidgetsFlutterBinding.ensureInitialized();
+  //
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    if (kDebugMode) {
+      print('Firebase initialization error: $e');
+    }
+  }
+  //
+  runApp(
+    const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(),
+    ),
+  );
+}
+ 
+/*
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -16,7 +42,7 @@ class MyApp extends StatelessWidget {
         // This is the theme of your application.
         //
         // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
+        // the application has a blue toolbar. Then, without quitting the app,
         // try changing the seedColor in the colorScheme below to Colors.green
         // and then invoke "hot reload" (save your changes or press the "hot
         // reload" button in a Flutter-supported IDE, or press "r" if you used
@@ -123,3 +149,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+*/
